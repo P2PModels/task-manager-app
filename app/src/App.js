@@ -25,7 +25,7 @@ function App() {
     ? parseInt(pathParts[1], 10) - 1
     : 0
   //const [name, setname] = useState('')
-  //const [priority, setpriority] = useState('')
+  //const [priority, setpriority] = useState('') prueba
   return (
     <Main>
       {isSyncing && <SyncIndicator />}

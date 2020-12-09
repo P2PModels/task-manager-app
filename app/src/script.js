@@ -3,7 +3,7 @@ import 'regenerator-runtime/runtime'
 import Aragon, { events } from '@aragon/api'
 
 const app = new Aragon()
-
+//prueba
 app.store(
   async (state, { event }) => {
     const nextState = {
