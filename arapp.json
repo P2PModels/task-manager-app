@@ -9,6 +9,16 @@
       "name": "Delete task",
       "id": "DELETETASK_ROLE",
       "params": []
+    },
+    {
+      "name": "End task",
+      "id": "ENDTASK_ROLE",
+      "params": []
+    },
+    {
+      "name": "Change priority",
+      "id": "CHANGEPRIORITY_ROLE",
+      "params": []
     }
 
   ],
