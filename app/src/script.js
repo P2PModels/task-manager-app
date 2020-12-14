@@ -14,13 +14,13 @@ app.store(
     try {
       switch (event) {
         case 'CreateTask':
-          return { ...nextState, numTasks: await getValue(), tasks: await getNames(), priorities: await getP()}
+          return { ...nextState, numTasks: await getValue(), tasks: await getNames(), priorities: await getP(), isDone: await getisDone()}
         case 'DeleteTask':
-          return { ...nextState, numTasks: await getValue(), tasks: await getNames(), priorities: await getP()}
+          return { ...nextState, numTasks: await getValue(), tasks: await getNames(), priorities: await getP(), isDone: await getisDone()}
         case 'ChangePriority':
-          return { ...nextState, numTasks: await getValue(), tasks: await getNames(), priorities: await getP()}
+          return { ...nextState, numTasks: await getValue(), tasks: await getNames(), priorities: await getP(), isDone: await getisDone()}
         case 'EndTask':
-          return { ...nextState, numTasks: await getValue(), tasks: await getNames(), priorities: await getP()}
+          return { ...nextState, numTasks: await getValue(), tasks: await getNames(), priorities: await getP(), isDone: await getisDone()}
         case events.SYNC_STATUS_SYNCING:
           return { ...nextState, isSyncing: true }
         case events.SYNC_STATUS_SYNCED:
@@ -49,7 +49,8 @@ function initializeState() {
       ...cachedState,
       numTasks: await getValue(),
       tasks: await getNames(),
-      priorities: await getP()
+      priorities: await getP(),
+      isDone: await getisDone()
     }
   }
 }
@@ -76,6 +77,19 @@ async function getP() {
   for(let i = 0; i < await getValue(); i++) {
     let n = await getTasks(i);
     names[i] = n[1];
+  }
+  return names;
+}
+async function getisDone() {
+  let names = [];
+  for(let i = 0; i < await getValue(); i++) {
+    let n = await getTasks(i);
+    if(n[2]){
+      names[i] = "Done";
+    }
+    else {
+      names[i] = "In progress";
+    }
   }
   return names;
 }
