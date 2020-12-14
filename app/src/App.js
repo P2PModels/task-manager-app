@@ -10,7 +10,7 @@ import styled from 'styled-components'
 
 function App() {
   const { api, appState, path, requestPath } = useAragonApi()
-  const { numTasks, tasks, priorities, isSyncing} = appState
+  const { numTasks, tasks, priorities, isDone,  isSyncing} = appState
 
   const pathParts = path.match(/^\/tab\/([0-9]+)/)
   const pageIndex = Array.isArray(pathParts)
@@ -117,7 +117,7 @@ function App() {
       </div>
 
      
-        
+      Tasks: {numTasks}
       <Table 
         css={`
           margin-top: 5%;
@@ -125,42 +125,44 @@ function App() {
         `}
         header={
           <TableRow>
-            <TableHeader css={`font-size:24px};`} title="Remaining tasks" />
-            <TableHeader css={`font-size:24px};`} title={numTasks} />
+            <TableHeader css={`font-size:24px};`} title="Task name" />
+            <TableHeader css={`font-size:24px};`} title="Priority" />
+            <TableHeader css={`font-size:24px};`} title="Status" />
           </TableRow>
         }
       >
+       
         <TableRow>
           <TableCell>
-            <Text css={`${textStyle('body2')};`}>Task name</Text>
+            <Text css={`${textStyle('body2')};`}>{tasks[0]}</Text>
           </TableCell>
           <TableCell>
-            <Text css={`${textStyle('body2')};`}>Priority</Text>
+            <Text css={`${textStyle('body2')};`}>{priorities[0]}</Text>
+          </TableCell>
+          <TableCell>
+            <Text css={`${textStyle('body2')};`}>{isDone[0]}</Text>
           </TableCell>
         </TableRow>
         <TableRow>
           <TableCell>
-            <Text css={`${textStyle('body3')};`}>{tasks[0]}</Text>
+            <Text css={`${textStyle('body2')};`}>{tasks[1]}</Text>
           </TableCell>
           <TableCell>
-            <Text css={`${textStyle('body3')};`}>{priorities[0]}</Text>
-          </TableCell>
-          
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <Text css={`${textStyle('body3')};`}>{tasks[1]}</Text>
+            <Text css={`${textStyle('body2')};`}>{priorities[1]}</Text>
           </TableCell>
           <TableCell>
-            <Text css={`${textStyle('body3')};`}>{priorities[1]}</Text>
+            <Text css={`${textStyle('body2')};`}>{isDone[1]}</Text>
           </TableCell>
         </TableRow>
         <TableRow>
           <TableCell>
-            <Text css={`${textStyle('body3')};`}>{tasks[2]}</Text>
+            <Text css={`${textStyle('body2')};`}>{tasks[2]}</Text>
           </TableCell>
           <TableCell>
-            <Text css={`${textStyle('body3')};`}>{priorities[2]}</Text>
+            <Text css={`${textStyle('body2')};`}>{priorities[2]}</Text>
+          </TableCell>
+          <TableCell>
+            <Text css={`${textStyle('body2')};`}>{isDone[2]}</Text>
           </TableCell>
         </TableRow>
       </Table>

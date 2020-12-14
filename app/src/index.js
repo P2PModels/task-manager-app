@@ -8,7 +8,7 @@ import App from './App'
 
 const reducer = state => {
   if (state === null) {
-    return { numTasks: 0, tasks:[], priorities:[], isSyncing: true }
+    return { numTasks: 0, tasks:[], priorities:[], isDone:[], isSyncing: true }
   }
   return state
 }
