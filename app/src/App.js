@@ -62,14 +62,14 @@ function App() {
           css={`
             width:45%;
           `}>
-          <Field label="Nombre de la tarea">
+          <Field label="Task name">
               <TextInput
                 wide
                 value={newName}
                 onChange={event => {setNewName(event.target.value)}}
               />
             </Field>
-            <Field label="Prioridad (HIGH, MEDIUM, LOW)">
+            <Field label="Priority (HIGH, MEDIUM, LOW)">
                 <TextInput
                   wide
                   value={newp}
@@ -89,14 +89,14 @@ function App() {
           css={`
             width:45%;
           `}>
-          <Field label="Nombre de la tarea que desea modificar">
+          <Field label="Task name to modify">
             <TextInput
               wide
               value={nameEdit}
               onChange={event => {setnameEdit(event.target.value)}}
             />
           </Field>
-          <Field label="Prioridad nueva (HIGH, MEDIUM, LOW)">
+          <Field label="New priority (HIGH, MEDIUM, LOW)">
               <TextInput
                 wide
                 value={pEdit}
@@ -120,22 +120,22 @@ function App() {
         
       <Table 
         css={`
-          margin-top: 2%;
+          margin-top: 5%;
             width:100%;
         `}
         header={
           <TableRow>
-            <TableHeader title="Tareas pendientes" />
-            <TableHeader title={numTasks} />
+            <TableHeader css={`font-size:24px};`} title="Remaining tasks" />
+            <TableHeader css={`font-size:24px};`} title={numTasks} />
           </TableRow>
         }
       >
         <TableRow>
           <TableCell>
-            <Text css={`${textStyle('body2')};`}>Nombre</Text>
+            <Text css={`${textStyle('body2')};`}>Task name</Text>
           </TableCell>
           <TableCell>
-            <Text css={`${textStyle('body2')};`}>Prioridad</Text>
+            <Text css={`${textStyle('body2')};`}>Priority</Text>
           </TableCell>
         </TableRow>
         <TableRow>
@@ -145,6 +145,7 @@ function App() {
           <TableCell>
             <Text css={`${textStyle('body3')};`}>{priorities[0]}</Text>
           </TableCell>
+          
         </TableRow>
         <TableRow>
           <TableCell>
@@ -156,10 +157,10 @@ function App() {
         </TableRow>
         <TableRow>
           <TableCell>
-            <Text>{tasks[2]}</Text>
+            <Text css={`${textStyle('body3')};`}>{tasks[2]}</Text>
           </TableCell>
           <TableCell>
-            <Text>{priorities[2]}</Text>
+            <Text css={`${textStyle('body3')};`}>{priorities[2]}</Text>
           </TableCell>
         </TableRow>
       </Table>
@@ -175,7 +176,7 @@ function App() {
           css={`
             width:45%;
           `}>
-          <Field label="Nombre de la tarea que desea finalizar">
+          <Field label="Task name to end">
             <TextInput
               wide
               value={nameEnd}
@@ -195,7 +196,7 @@ function App() {
           css={`
             width:45%;
           `}>
-          <Field label="Nombre de la tarea que desea Eliminar">
+          <Field label="Task name to delete">
             <TextInput
               wide
               value={nameToDel}
