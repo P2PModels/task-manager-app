@@ -115,10 +115,10 @@ contract CounterApp is AragonApp {
     using SafeMath for uint256;
 
     /// Events
-    event CreateTask(address indexed entity, uint256 step, string name, string p);
+    event CreateTask(address indexed entity, uint256 step, string name, uint256 p);
     event DeleteTask(address indexed entity, uint256 step, string name);
     event EndTask(address indexed entity, string name);
-    event ChangePriority(address indexed entity, string name, string p);
+    event ChangePriority(address indexed entity, string name, uint256 p);
 
     /// State
     uint256 public numTasks;
@@ -140,7 +140,7 @@ contract CounterApp is AragonApp {
     function initialize() public onlyInit {
         
         numTasks = 1;
-        t = Task("hola", priority.LOW, false);
+        t = Task("Crear proyecto", priority.LOW, false);
         tasks.push(t);
 
         initialized();
@@ -155,17 +155,17 @@ contract CounterApp is AragonApp {
      * @param name task name
      * @param p  task priority
      */
-    function createTask(uint256 step, string name, string p) external auth(CREATETASK_ROLE) {
+    function createTask(uint256 step, string name, uint256 p) external auth(CREATETASK_ROLE) {
         priority pr;
         
-        if(compareStrings(p, "HIGH")) {
+        if(p==0) {
             pr = priority.HIGH;
         }
-        else if(compareStrings(p, "MEDIUM"))  
+        else if(p==1)  
         {
             pr = priority.MEDIUM;
         }
-        else if(compareStrings(p, "LOW"))  
+        else if(p==2)  
         {
             pr = priority.LOW;
         }
@@ -214,18 +214,18 @@ contract CounterApp is AragonApp {
      * @param name task name to change
      * @param p  new priority
      */
-    function changePriority(string  name, string  p) external  auth(CHANGEPRIORITY_ROLE){
+    function changePriority(string  name, uint256  p) external  auth(CHANGEPRIORITY_ROLE){
          uint i = 0;
           priority pr;
         
-        if(compareStrings(p, "HIGH")) {
+        if(p==0) {
             pr = priority.HIGH;
         }
-        else if(compareStrings(p, "MEDIUM"))  
+        else if(p==1)  
         {
             pr = priority.MEDIUM;
         }
-        else if(compareStrings(p, "LOW"))  
+        else if(p==2)  
         {
             pr = priority.LOW;
         }

@@ -3,7 +3,7 @@ import { useAragonApi } from '@aragon/api-react'
 import {
   Box, Button, GU, Header, IconMinus, IconPlus,
   Main, SyncIndicator, Tabs, Text, textStyle,
-  TextInput,Card,
+  TextInput,Card, DropDown,
   Field,Table, TableHeader, TableRow, TableCell,
 } from '@aragon/ui'
 import styled from 'styled-components'
@@ -17,12 +17,13 @@ function App() {
     ? parseInt(pathParts[1], 10) - 1
     : 0
     
-  const [newp, setNewP] = useState('')
+  
   const [newName, setNewName] = useState('')
   const [nameToDel, setnameToDel] = useState('')
   const [nameEdit, setnameEdit] = useState('')
-  const [pEdit, setpEdit] = useState('')
+  const [pEdit, setpEdit] = useState(-1)
   const [nameEnd, setnameEnd] = useState('')
+  const [selected, setSelected] = useState(-1)
   return (
     <Main>
       {isSyncing && <SyncIndicator />}
@@ -69,17 +70,18 @@ function App() {
                 onChange={event => {setNewName(event.target.value)}}
               />
             </Field>
-            <Field label="Priority (HIGH, MEDIUM, LOW)">
-                <TextInput
-                  wide
-                  value={newp}
-                  onChange={event => {setNewP(event.target.value)}}
-                />
-            </Field> 
+            <DropDown 
+                placeholder="Select a priority"
+                wide
+                items={["HIGH", "MEDIUM", "LOW"]}
+                selected={selected}
+                onChange={setSelected}
+            />
             <Button
               label="Create task"
-              onClick={() => api.createTask(1, newName, newp).toPromise()}
+              onClick={() => api.createTask(1, newName, selected).toPromise()}
               css={`
+                margin-top:7%;
                 background-color: lightblue;
                 margin-left: ${2 * GU}px;
               `}
@@ -96,18 +98,18 @@ function App() {
               onChange={event => {setnameEdit(event.target.value)}}
             />
           </Field>
-          <Field label="New priority (HIGH, MEDIUM, LOW)">
-              <TextInput
+          <DropDown placeholder="Select a new priority"
                 wide
-                value={pEdit}
-                onChange={event => {setpEdit(event.target.value)}}
-              />
-          </Field> 
+                items={["HIGH", "MEDIUM", "LOW"]}
+                selected={pEdit}
+                onChange={setpEdit}
+            />
           
           <Button
             label="Modify priority"
             onClick={() => api.changePriority(nameEdit, pEdit).toPromise()}
             css={`
+              margin-top: 7%;
               background-color: wheat;
               margin-left: ${2 * GU}px;
             `}
@@ -116,11 +118,16 @@ function App() {
         
       </div>
 
-     
-      Tasks: {numTasks}
+      <Text css={`
+          margin:5%;
+          float: right;
+          color:#585C5C;
+          font-size:15pt;
+        `}>TASKS: {numTasks}</Text>
+      
+
       <Table 
         css={`
-          margin-top: 5%;
             width:100%;
         `}
         header={
@@ -166,6 +173,8 @@ function App() {
           </TableCell>
         </TableRow>
       </Table>
+      
+      
         
       <div 
         css={`

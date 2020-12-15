@@ -76,7 +76,16 @@ async function getP() {
   let names = [];
   for(let i = 0; i < await getValue(); i++) {
     let n = await getTasks(i);
-    names[i] = n[1];
+    if(n[1] == 0) {
+       names[i] = "HIGH";
+    }
+    if(n[1] == 1) {
+      names[i] = "MEDIUM";
+    }
+    if(n[1] == 2) {
+      names[i] = "LOW";
+    }
+   
   }
   return names;
 }
