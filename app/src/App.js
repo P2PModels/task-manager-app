@@ -28,22 +28,18 @@ function App() {
     <Main>
       {isSyncing && <SyncIndicator />}
       <Header
-        primary="Proyect:"
+        primary="P2P Models:"
         secondary={
           <span
             css={`
               ${textStyle('title2')}
             `}
           >
-            P2P Models
+            Total tasks: {numTasks}
           </span>
         }
       />
-      <Tabs
-        items={['Tab 1', 'Tab 2']}
-        selected={pageIndex}
-        onChange={index => requestPath(`/tab/${index + 1}`)}
-      />
+    
       <Box
         css={`
           align-items: center;
@@ -118,16 +114,11 @@ function App() {
         
       </div>
 
-      <Text css={`
-          margin:5%;
-          float: right;
-          color:#585C5C;
-          font-size:15pt;
-        `}>TASKS: {numTasks}</Text>
       
 
       <Table 
         css={`
+            margin-top: 4%;
             width:100%;
         `}
         header={
@@ -138,43 +129,11 @@ function App() {
           </TableRow>
         }
       >
-       
-        <TableRow>
-          <TableCell>
-            <Text css={`${textStyle('body2')};`}>{tasks[0]}</Text>
-          </TableCell>
-          <TableCell>
-            <Text css={`${textStyle('body2')};`}>{priorities[0]}</Text>
-          </TableCell>
-          <TableCell>
-            <Text css={`${textStyle('body2')};`}>{isDone[0]}</Text>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <Text css={`${textStyle('body2')};`}>{tasks[1]}</Text>
-          </TableCell>
-          <TableCell>
-            <Text css={`${textStyle('body2')};`}>{priorities[1]}</Text>
-          </TableCell>
-          <TableCell>
-            <Text css={`${textStyle('body2')};`}>{isDone[1]}</Text>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>
-            <Text css={`${textStyle('body2')};`}>{tasks[2]}</Text>
-          </TableCell>
-          <TableCell>
-            <Text css={`${textStyle('body2')};`}>{priorities[2]}</Text>
-          </TableCell>
-          <TableCell>
-            <Text css={`${textStyle('body2')};`}>{isDone[2]}</Text>
-          </TableCell>
-        </TableRow>
+     {write(tasks, priorities, isDone, 0)}
+     {write(tasks, priorities, isDone, 1)}
+     {write(tasks, priorities, isDone, 2)}
+     {write(tasks, priorities, isDone, 3)}
       </Table>
-      
-      
         
       <div 
         css={`
@@ -226,6 +185,22 @@ function App() {
       </Box>
     </Main>
   )
+}
+
+function write(tasks, priorities, isDone, i) {
+  return (
+    <TableRow>
+      <TableCell>
+        <Text css={`${textStyle('body2')};`}>{tasks[i]}</Text>
+      </TableCell>
+      <TableCell>
+        <Text css={`${textStyle('body2')};`}>{priorities[i]}</Text>
+      </TableCell>
+      <TableCell>
+        <Text css={`${textStyle('body2')};`}>{isDone[i]}</Text>
+      </TableCell>
+    </TableRow>
+  );
 }
 
 const Buttons = styled.div`
