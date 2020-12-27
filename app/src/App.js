@@ -23,12 +23,12 @@ function App() {
   const [nameEdit, setnameEdit] = useState('')
   const [pEdit, setpEdit] = useState(-1)
   const [nameEnd, setnameEnd] = useState('')
-  const [selected, setSelected] = useState(-1)
+  const [newTaskPrio, setNewTaskPrio] = useState(-1)
   return (
     <Main>
       {isSyncing && <SyncIndicator />}
       <Header
-        primary="P2P Models:"
+        GHprimary="P2P Models:"
         secondary={
           <span
             css={`
@@ -40,15 +40,7 @@ function App() {
         }
       />
     
-      <Box
-        css={`
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          height: ${150 * GU}px;
-          ${textStyle('title3')};
-        `}
-      >
+      <Box>
       <div 
         css={`
           display:flex;
@@ -63,19 +55,20 @@ function App() {
               <TextInput
                 wide
                 value={newName}
+
                 onChange={event => {setNewName(event.target.value)}}
               />
             </Field>
             <DropDown 
                 placeholder="Select a priority"
                 wide
-                items={["HIGH", "MEDIUM", "LOW"]}
-                selected={selected}
-                onChange={setSelected}
+                items={['HIGH', 'MEDIUM', 'LOW']}
+                selected={newTaskPrio}
+                onChange={setNewTaskPrio}
             />
             <Button
               label="Create task"
-              onClick={() => api.createTask(1, newName, selected).toPromise()}
+              onClick={() => api.createTask(newName, newTaskPrio).toPromise()}
               css={`
                 margin-top:7%;
                 background-color: lightblue;
@@ -175,7 +168,7 @@ function App() {
           </Field>
           <Button
             label="Delete task"
-            onClick={() => api.deleteTask(1, nameToDel).toPromise()}
+            onClick={() => api.deleteTask(nameToDel).toPromise()}
             css={`
               background-color: lightcoral;
             `}
