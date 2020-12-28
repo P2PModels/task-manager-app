@@ -80,13 +80,13 @@ function App() {
           css={`
             width:45%;
           `}>
-          <Field label="Task name to modify">
-            <TextInput
+          <DropDown 
+              placeholder="Select a task"
               wide
-              value={nameEdit}
-              onChange={event => {setnameEdit(event.target.value)}}
-            />
-          </Field>
+              items={tasks}
+              selected={nameEdit}
+              onChange={setnameEdit}
+          />
           <DropDown placeholder="Select a new priority"
                 wide
                 items={["HIGH", "MEDIUM", "LOW"]}
@@ -96,7 +96,7 @@ function App() {
           
           <Button
             label="Modify priority"
-            onClick={() => api.changePriority(nameEdit, pEdit).toPromise()}
+            onClick={() => api.changePriority(tasks[nameEdit], pEdit).toPromise()}
             css={`
               margin-top: 7%;
               background-color: wheat;
@@ -122,11 +122,7 @@ function App() {
           </TableRow>
         }
       >
-     {/* {write(tasks, priorities, isDone, 0)}
-     {write(tasks, priorities, isDone, 1)}
-     {write(tasks, priorities, isDone, 2)}
-     {write(tasks, priorities, isDone, 3)} */}
-     {renderTable(tasks, priorities, isDone)}
+    {renderTable(tasks, priorities, isDone)}
       </Table>
         
       <div 
@@ -140,16 +136,16 @@ function App() {
           css={`
             width:45%;
           `}>
-          <Field label="Task name to end">
-            <TextInput
+          <DropDown 
+              placeholder="Select a task"
               wide
-              value={nameEnd}
-              onChange={event => {setnameEnd(event.target.value)}}
-            />
-          </Field>
+              items={tasks}
+              selected={nameEnd}
+              onChange={setnameEnd}
+          />
           <Button
             label="End task"
-            onClick={() => api.endTask(nameEnd).toPromise()}
+            onClick={() => api.endTask(tasks[nameEnd]).toPromise()}
             css={`
               background-color: silver;
               margin-left: ${2 * GU}px;
@@ -160,16 +156,16 @@ function App() {
           css={`
             width:45%;
           `}>
-          <Field label="Task name to delete">
-            <TextInput
+          <DropDown 
+              placeholder="Select a task"
               wide
-              value={nameToDel}
-              onChange={event => {setnameToDel(event.target.value)}}
-            />
-          </Field>
+              items={tasks}
+              selected={nameToDel}
+              onChange={setnameToDel}
+          />
           <Button
             label="Delete task"
-            onClick={() => api.deleteTask(nameToDel).toPromise()}
+            onClick={() => api.deleteTask(tasks[nameToDel]).toPromise()}
             css={`
               background-color: lightcoral;
             `}
@@ -179,22 +175,6 @@ function App() {
       </Box>
     </Main>
   )
-}
-
-function write(tasks, priorities, isDone, i) {
-  return (
-    <TableRow>
-      <TableCell>
-        <Text css={`${textStyle('body2')};`}>{tasks[i]}</Text>
-      </TableCell>
-      <TableCell>
-        <Text css={`${textStyle('body2')};`}>{priorities[i]}</Text>
-      </TableCell>
-      <TableCell>
-        <Text css={`${textStyle('body2')};`}>{isDone[i]}</Text>
-      </TableCell>
-    </TableRow>
-  );
 }
 
 function renderTable(tasks, priorities, isDone) {
