@@ -122,10 +122,11 @@ function App() {
           </TableRow>
         }
       >
-     {write(tasks, priorities, isDone, 0)}
+     {/* {write(tasks, priorities, isDone, 0)}
      {write(tasks, priorities, isDone, 1)}
      {write(tasks, priorities, isDone, 2)}
-     {write(tasks, priorities, isDone, 3)}
+     {write(tasks, priorities, isDone, 3)} */}
+     {renderTable(tasks, priorities, isDone)}
       </Table>
         
       <div 
@@ -196,6 +197,24 @@ function write(tasks, priorities, isDone, i) {
   );
 }
 
+function renderTable(tasks, priorities, isDone) {
+  const zipped = tasks.map((t,i) => [t, priorities[i],isDone[i] ]);
+  return zipped.map((task) => {
+    const [name, prio, done] = task
+    return (<TableRow>
+      <TableCell>
+        <Text css={`${textStyle('body2')};`}>{name}</Text>
+      </TableCell>
+      <TableCell>
+        <Text css={`${textStyle('body2')};`}>{prio}</Text>
+      </TableCell>
+      <TableCell>
+        <Text css={`${textStyle('body2')};`}>{done}</Text>
+      </TableCell>
+    </TableRow>
+    )
+  })
+}
 const Buttons = styled.div`
   display: grid;
   grid-auto-flow: column;

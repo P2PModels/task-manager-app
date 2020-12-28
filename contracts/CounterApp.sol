@@ -32,8 +32,10 @@ contract CounterApp is AragonApp {
 
     function initialize() public onlyInit {
         
-        numTasks = 1;
+        numTasks = 2;
         t = Task("Crear proyecto", priority.LOW, false);
+        tasks.push(t);
+        t = Task("TFG", priority.MEDIUM, false);
         tasks.push(t);
 
         initialized();
