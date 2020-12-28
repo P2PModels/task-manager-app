@@ -67,13 +67,15 @@ contract CounterApp is AragonApp {
             i++;
         }
         if(i != tasks.length) {
-            delete tasks[i];
+            for (uint j = i; j < tasks.length - 1; j++){
+                tasks[j] = tasks[j+1];
+            }
+            delete tasks[tasks.length - 1];
+            tasks.length--;
             numTasks = numTasks.sub(1);
             emit DeleteTask(msg.sender, name);
         }
     }
-
-
     /**
      * @notice finish task
      * @param name task name
