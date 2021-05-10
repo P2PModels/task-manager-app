@@ -55,7 +55,6 @@ function App() {
               <TextInput
                 wide
                 value={newName}
-
                 onChange={event => {setNewName(event.target.value)}}
               />
             </Field>
@@ -86,6 +85,10 @@ function App() {
               items={tasks}
               selected={nameEdit}
               onChange={setnameEdit}
+              css={`
+                margin-top:7%;
+                margin-bottom:8%;
+              `}
           />
           <DropDown placeholder="Select a new priority"
                 wide
@@ -147,6 +150,7 @@ function App() {
             label="End task"
             onClick={() => api.endTask(tasks[nameEnd]).toPromise()}
             css={`
+              margin-top:7%;
               background-color: silver;
               margin-left: ${2 * GU}px;
             `}
@@ -167,7 +171,9 @@ function App() {
             label="Delete task"
             onClick={() => api.deleteTask(tasks[nameToDel]).toPromise()}
             css={`
+              margin-top:7%;
               background-color: lightcoral;
+              margin-left: ${2 * GU}px;
             `}
           />
         </div>
